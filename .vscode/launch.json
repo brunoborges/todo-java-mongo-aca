@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "com.example.App",
+            "projectName": "todo-azure-api"
+        },
+        {
             "name": "Debug Web",
             "request": "launch",
             "type": "pwa-msedge",
@@ -12,9 +19,8 @@
             "url": "http://localhost:3000",
             "sourceMapPathOverrides": {
                 "webpack:///src/*": "${webRoot}/*"
-            }, 
+            }
         },
-
         {
             "name": "Debug API",
             "request": "launch",
@@ -34,7 +40,7 @@
             },
             "preLaunchTask": "Restore API",
             "outputCapture": "std"
-        },
+        }
     ],
 
     "inputs": [

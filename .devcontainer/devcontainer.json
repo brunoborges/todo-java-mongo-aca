@@ -7,15 +7,17 @@
         }
     },
     "features": {
-        "github-cli": "2",
-        "azure-cli": "2.38",
+        "github-cli": "latest",
+        "azure-cli": "latest",
         "python": "os-provided",
         "dotnet": "6.0",
         "docker-from-docker": "20.10",
         "node": {
             "version": "16",
             "nodeGypDependencies": false
-        }
+		},
+		"java": "17",
+		"maven": "latest"
     },
     "extensions": [
         "ms-azuretools.azure-dev",
