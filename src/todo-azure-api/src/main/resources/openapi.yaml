@@ -47,9 +47,9 @@ components:
     TodoState:
       type: string
       enum:
-        - todo
-        - inprogress
-        - done
+        - TODO
+        - INPROGRESS
+        - DONE
   parameters:
     listId:
       in: path
