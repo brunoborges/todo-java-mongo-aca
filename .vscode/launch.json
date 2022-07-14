@@ -5,13 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "Launch App",
-            "request": "launch",
-            "mainClass": "com.example.App",
-            "projectName": "todo-azure-api"
-        },
-        {
             "name": "Debug Web",
             "request": "launch",
             "type": "pwa-msedge",
@@ -24,25 +17,12 @@
         {
             "name": "Debug API",
             "request": "launch",
-            "runtimeArgs": [
-                "run",
-                "start"
-            ],
-            "runtimeExecutable": "npm",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "pwa-node",
+            "type": "java",
             "cwd": "${workspaceFolder}/src/api",
-            "envFile": "${input:dotEnvFilePath}",
-            "env": {
-                "NODE_ENV": "development"
-            },
-            "preLaunchTask": "Restore API",
-            "outputCapture": "std"
+            "mainClass": "com.example.App",
+            "projectName": "todo-azure-api"
         }
     ],
-
     "inputs": [
         {
             "id": "dotEnvFilePath",

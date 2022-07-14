@@ -34,7 +34,8 @@
     ],
     "forwardPorts": [
         3000,
-        3100
+        3100,
+        8080
     ],
     "postCreateCommand": "",
     "remoteUser": "vscode"

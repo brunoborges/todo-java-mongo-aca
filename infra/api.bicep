@@ -46,7 +46,7 @@ resource api 'Microsoft.App/containerApps@2022-03-01' = {
       activeRevisionsMode: 'single'
       ingress: {
         external: true
-        targetPort: 3100
+        targetPort: 8080
         transport: 'auto'
       }
       secrets: [
