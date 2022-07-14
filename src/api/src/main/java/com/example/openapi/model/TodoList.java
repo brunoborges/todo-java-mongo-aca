@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "TodoList", description = " A list of related Todo items")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-14T21:31:08.805773106Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-14T21:48:55.739039250Z[Etc/UTC]")
 public class TodoList {
 
   @JsonProperty("id")
