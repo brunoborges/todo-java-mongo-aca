@@ -19,7 +19,7 @@ public class InMemoryToDoRepository implements ToDoRepository {
 
     private static final TodoList DUMMY_LIST = new TodoList();
 
-    private Map<TodoList, Set<TodoItem>> todoListItems = Collections.synchronizedSortedMap(new TreeMap<>((TodoList o1, TodoList o2) -> {
+    private Map<TodoList, Set<TodoItem>> todoListItems = new TreeMap<>((TodoList o1, TodoList o2) -> {
         if (o1 != null && o2 != null) {
             var o1Id = o1.getId();
             var o2Id = o2.getId();
@@ -32,7 +32,7 @@ public class InMemoryToDoRepository implements ToDoRepository {
         }
 
         return 0;
-    }));
+    });
 
     private AtomicInteger nextListId = new AtomicInteger(0);
     private AtomicInteger nextItemId = new AtomicInteger(0);
@@ -75,7 +75,9 @@ public class InMemoryToDoRepository implements ToDoRepository {
         }
 
         var listOfItems = todoListItems.get(todoList);
-        listOfItems.add(todoItem);
+        synchronized (listOfItems) {
+            listOfItems.add(todoItem);
+        }
 
         return todoItem;
     }
@@ -107,7 +109,9 @@ public class InMemoryToDoRepository implements ToDoRepository {
         if (item.isPresent()) {
             var list = internal_getListById(listId).orElse(DUMMY_LIST);
             var listOfItems = todoListItems.get(list);
-            listOfItems.remove(item.get());
+            synchronized (listOfItems) {
+                listOfItems.remove(item.get());
+            }
             return true;
         }
 
@@ -119,11 +123,14 @@ public class InMemoryToDoRepository implements ToDoRepository {
         var todoListOpt = internal_getListById(listId);
 
         if (todoListOpt.isPresent()) {
-            todoListItems.remove(todoListOpt.get());
+            synchronized (todoListItems) {
+                todoListItems.remove(todoListOpt.get());
+            }
             return true;
         }
 
         return false;
+
     }
 
     @Override
@@ -186,22 +193,24 @@ public class InMemoryToDoRepository implements ToDoRepository {
 
         itemOpt.ifPresent(item -> {
             wrapper.value = item;
-            if (todoItem.getDueDate() != null) {
-                item.setDueDate(todoItem.getDueDate());
-            }
-            if (todoItem.getCompletedDate() != null) {
-                item.setCompletedDate(todoItem.getCompletedDate());
-            }
-            if (todoItem.getName() != null) {
-                item.setName(todoItem.getName());
-            }
-            if (todoItem.getDescription() != null) {
-                item.setDescription(todoItem.getDescription());
-            }
-            if (item.getState() != null) {
-                item.setState(todoItem.getState());
-                if (item.getState() == TodoState.DONE) {
-                    item.setCompletedDate(OffsetDateTime.now());
+            synchronized (item) {
+                if (item.getDueDate() != null) {
+                    item.setDueDate(todoItem.getDueDate());
+                }
+                if (todoItem.getCompletedDate() != null) {
+                    item.setCompletedDate(todoItem.getCompletedDate());
+                }
+                if (todoItem.getName() != null) {
+                    item.setName(todoItem.getName());
+                }
+                if (todoItem.getDescription() != null) {
+                    item.setDescription(todoItem.getDescription());
+                }
+                if (item.getState() != null) {
+                    item.setState(todoItem.getState());
+                    if (item.getState() == TodoState.DONE) {
+                        item.setCompletedDate(OffsetDateTime.now());
+                    }
                 }
             }
         });
@@ -219,10 +228,11 @@ public class InMemoryToDoRepository implements ToDoRepository {
 
         listOfItems.forEach(item -> {
             if (requestBody.contains(item.getId())) {
-                item.setState(state);
-
-                if (state == TodoState.DONE) {
-                    item.setCompletedDate(OffsetDateTime.now());
+                synchronized (item) {
+                    item.setState(state);
+                    if (state == TodoState.DONE) {
+                        item.setCompletedDate(OffsetDateTime.now());
+                    }
                 }
             }
         });
@@ -238,8 +248,10 @@ public class InMemoryToDoRepository implements ToDoRepository {
         }
 
         var todoList = todoListOpt.get();
-        todoList.setName(updatedTodoList.getName());
-        todoList.setDescription(updatedTodoList.getDescription());
+        synchronized (todoList) {
+            todoList.setName(updatedTodoList.getName());
+            todoList.setDescription(updatedTodoList.getDescription());
+        }
 
         return todoList;
     }
