@@ -10,13 +10,10 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.stereotype.Component;
-
 import com.example.openapi.model.TodoItem;
 import com.example.openapi.model.TodoList;
 import com.example.openapi.model.TodoState;
 
-@Component
 public class InMemoryToDoRepository implements ToDoRepository {
 
     private static final TodoList DUMMY_LIST = new TodoList();

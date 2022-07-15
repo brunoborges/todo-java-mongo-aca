@@ -32,17 +32,15 @@
                 }
             },
             "presentation": {
-                "panel": "dedicated",
+                "panel": "dedicated"
             },
             "problemMatcher": []
         },
-
         {
             "label": "Start API",
             "type": "dotenv",
             "targetTasks": [
-                "Restore API",
-                "API npm start"
+                "API java start"
             ],
             "file": "${input:dotEnvFilePath}"
         },
@@ -56,30 +54,35 @@
             "problemMatcher": []
         },
         {
-            "label": "API npm start",
+            "label": "API java start",
             "detail": "Helper task--use 'Start API' task to ensure environment is set up correctly",
             "type": "shell",
-            "command": "npm run start",
+            "command": "mvn spring-boot:run",
             "options": {
-                "cwd": "${workspaceFolder}/src/api/",
-                "env": {
-                    "NODE_ENV": "development"
-                }
+                "cwd": "${workspaceFolder}/src/api/"
             },
             "presentation": {
-                "panel": "dedicated",
+                "panel": "dedicated"
             },
             "problemMatcher": []
         },
-
         {
             "label": "Start API and Web",
-            "dependsOn":[
+            "dependsOn": [
                 "Start API",
                 "Start Web"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "Start API and Web WITHOUT AZURE STUFF",
+            "dependsOn": [
+                "API java start",
+                "Web npm start"
+            ],
+            "problemMatcher": []
         }
+
     ],
 
     "inputs": [

@@ -18,7 +18,7 @@ export const getApplicationInsights = (): ApplicationInsights => {
         config: {
             connectionString: config.observability.connectionString,
             enableCorsCorrelation: true,
-            distributedTracingMode: DistributedTracingModes.W3C, 
+            distributedTracingMode: DistributedTracingModes.W3C,
             extensions: [plugin],
             extensionConfig: {
                 [plugin.identifier]: { history: browserHistory }
@@ -27,16 +27,21 @@ export const getApplicationInsights = (): ApplicationInsights => {
     }
 
     applicationInsights = new ApplicationInsights(ApplicationInsightsConfig);
-    applicationInsights.loadAppInsights();
 
-    applicationInsights.addTelemetryInitializer((telemetry: ITelemetryItem) => {
-        if (!telemetry) {
-            return;
-        }
-        if (telemetry.tags) {
-            telemetry.tags['ai.cloud.role'] = "webui";
-        }
-    });
+    try {
+        applicationInsights.loadAppInsights();
+
+        applicationInsights.addTelemetryInitializer((telemetry: ITelemetryItem) => {
+            if (!telemetry) {
+                return;
+            }
+            if (telemetry.tags) {
+                telemetry.tags['ai.cloud.role'] = "webui";
+            }
+        });
+    } catch (error) {
+        console.log("Error initializing application insights", error);
+    }
 
     return applicationInsights;
 }

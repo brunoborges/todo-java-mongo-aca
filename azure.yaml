@@ -6,7 +6,7 @@ metadata:
 services:
   api:
     project: src/api
-    language: java
+    language: js
     host: containerapp
   web:
     project: src/web
