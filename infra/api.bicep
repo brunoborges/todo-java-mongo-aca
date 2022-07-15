@@ -34,7 +34,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' existing = {
 resource api 'Microsoft.App/containerApps@2022-03-01' = {
   name: 'ca-api-${resourceToken}'
   location: location
-  tags: union(tags, {
+  tags: union(tags,   {
       'azd-service-name': 'api'
     })
   identity: {
@@ -78,8 +78,15 @@ resource api 'Microsoft.App/containerApps@2022-03-01' = {
               value: keyVault.properties.vaultUri
             }
           ]
+          resources: {
+            cpu: 1
+            memory: ' 2Gi' 
+          }
         }
       ]
+      scale: {
+        minReplicas: 1
+      }
     }
   }
 }

@@ -8,10 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.microsoft.applicationinsights.attach.ApplicationInsights;
 
-/**
- * Hello world!
- *
- */
 @SpringBootApplication
 public class App {
 	public static void main(String[] args) {
