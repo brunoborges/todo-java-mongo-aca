@@ -2,6 +2,7 @@ package com.example;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -134,6 +135,9 @@ public class InMemoryToDoRepository implements ToDoRepository {
     public List<TodoItem> getItemsByListId(String listId, BigDecimal top, BigDecimal skip) {
         var list = internal_getListById(listId).orElse(DUMMY_LIST);
         var listOfItems = todoListItems.get(list);
+        if (listOfItems == null) {
+            return Collections.emptyList();
+        }
         return List.copyOf(listOfItems);
     }
 
