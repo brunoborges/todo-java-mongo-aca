@@ -18,7 +18,7 @@ public class InMemoryToDoRepository implements ToDoRepository {
 
     private static final TodoList DUMMY_LIST = new TodoList();
 
-    private Map<TodoList, Set<TodoItem>> todoListItems = new TreeMap<>((TodoList o1, TodoList o2) -> {
+    private Map<TodoList, Set<TodoItem>> todoListItems = Collections.synchronizedSortedMap(new TreeMap<>((TodoList o1, TodoList o2) -> {
         if (o1 != null && o2 != null) {
             var o1Id = o1.getId();
             var o2Id = o2.getId();
@@ -31,7 +31,7 @@ public class InMemoryToDoRepository implements ToDoRepository {
         }
 
         return 0;
-    });
+    }));
 
     private AtomicInteger nextListId = new AtomicInteger(0);
     private AtomicInteger nextItemId = new AtomicInteger(0);
