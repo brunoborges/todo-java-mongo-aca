@@ -10,4 +10,4 @@ FROM mcr.microsoft.com/openjdk/jdk:17-mariner
 
 COPY --from=build /app/target/todo-azure-api-1.0-SNAPSHOT.jar /todo-azure-api-1.0-SNAPSHOT.jar
 
-CMD ["java", "-jar", "/todo-azure-api-1.0-SNAPSHOT.jar"]
+CMD ["java", "-XX:MaxRAMPercentage=70", "-XX:+UseParallelGC", "-XX:ActiveProcessorCount=2", "-jar", "/todo-azure-api-1.0-SNAPSHOT.jar"]
