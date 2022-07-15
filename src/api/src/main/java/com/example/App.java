@@ -6,17 +6,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.microsoft.applicationinsights.attach.ApplicationInsights;
+
 /**
  * Hello world!
  *
  */
 @SpringBootApplication
 public class App {
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
-    }
+	public static void main(String[] args) {
+		ApplicationInsights.attach();
+		SpringApplication.run(App.class, args);
+	}
 
-    @Bean
+	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
@@ -30,7 +33,7 @@ public class App {
 	public ToDoRepository getToDoRepository() {
 		// if cosmosdb connection string is present, return CosmosDBToDoRepository
 		// else return InMemoryToDoRepository
-		
+
 		return new InMemoryToDoRepository();
 	}
 
