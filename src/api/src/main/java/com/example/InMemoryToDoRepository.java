@@ -210,6 +210,8 @@ public class InMemoryToDoRepository implements ToDoRepository {
                     item.setState(todoItem.getState());
                     if (item.getState() == TodoState.DONE) {
                         item.setCompletedDate(OffsetDateTime.now());
+                    } else {
+                        item.setCompletedDate(null);
                     }
                 }
             }
