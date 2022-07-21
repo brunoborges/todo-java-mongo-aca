@@ -1,3 +1,4 @@
 .azure
 
 **/target
+src/api/applicationinsights.log
