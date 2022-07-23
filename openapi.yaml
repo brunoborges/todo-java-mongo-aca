@@ -13,7 +13,6 @@ components:
       required:
         - listId
         - name
-        - description
       description: A task that needs to be completed
       properties:
         id:

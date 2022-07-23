@@ -38,7 +38,7 @@ Content-Type: application/json
 
 {
   "name": "New Todo",
-  "description": "This is a new todo"
+  "listId": "{{list_id}}"
 }
 
 @item_id = {{ create_item.response.body.id }}

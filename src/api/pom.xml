@@ -169,8 +169,8 @@
                 </goals>
                 <configuration>
                   <inputSpec>
-                  ${project.basedir}/src/main/resources/openapi.yaml
-                </inputSpec>
+                    ${project.basedir}/../../openapi.yaml
+                  </inputSpec>
                   <output>${project.basedir}</output>
                   <generatorName>spring</generatorName>
                   <apiPackage>com.example.openapi.api</apiPackage>
