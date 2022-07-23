@@ -16,7 +16,7 @@ import com.example.openapi.model.TodoItem;
 import com.example.openapi.model.TodoList;
 import com.example.openapi.model.TodoState;
 
-public class CosmosDBToDoRepository implements ToDoRepository {
+public class MongoDBToDoRepository implements ToDoRepository {
 
     @Autowired
     private MongoTemplate mongo;

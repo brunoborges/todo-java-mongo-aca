@@ -66,13 +66,13 @@ public class ToDoController implements ListsApiDelegate {
     @Override
     public ResponseEntity<TodoItem> getItemById(String listId, String itemId) {
         var item = toDoRepository.getItemById(listId, itemId);
-        return new ResponseEntity<>(item, item != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(item, item == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<TodoItem>> getItemsByListId(String listId, BigDecimal top, BigDecimal skip) {
         var items = toDoRepository.getItemsByListId(listId, top, skip);
-        return new ResponseEntity<List<TodoItem>>(items, items != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return new ResponseEntity<List<TodoItem>>(items, items.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
     @Override
