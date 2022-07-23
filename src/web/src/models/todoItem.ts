@@ -1,7 +1,7 @@
 export enum TodoItemState {
-    Todo = "TODO",
-    InProgress = "INPROGRESS",
-    Done = "DONE"
+    Todo = "todo",
+    InProgress = "inprogress",
+    Done = "done"
 }
 
 export interface TodoItem {

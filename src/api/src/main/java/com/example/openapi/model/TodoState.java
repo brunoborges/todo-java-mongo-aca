@@ -20,14 +20,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Gets or Sets TodoState
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-14T21:48:55.739039250Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-23T01:35:10.535667491Z[Etc/UTC]")
 public enum TodoState {
   
-  TODO("TODO"),
+  TODO("todo"),
   
-  INPROGRESS("INPROGRESS"),
+  INPROGRESS("inprogress"),
   
-  DONE("DONE");
+  DONE("done");
 
   private String value;
 

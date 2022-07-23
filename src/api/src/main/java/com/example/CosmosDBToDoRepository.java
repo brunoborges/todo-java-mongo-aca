@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.BulkOperations.BulkMode;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -15,15 +15,11 @@ import org.springframework.data.mongodb.core.query.Update;
 import com.example.openapi.model.TodoItem;
 import com.example.openapi.model.TodoList;
 import com.example.openapi.model.TodoState;
-import com.mongodb.client.MongoClient;
 
 public class CosmosDBToDoRepository implements ToDoRepository {
 
+    @Autowired
     private MongoTemplate mongo;
-
-    public CosmosDBToDoRepository(MongoClient mongoClient, String database) {
-        this.mongo = new MongoTemplate(mongoClient, database);
-    }
 
     @Override
     public TodoItem createItem(String listId, TodoItem todoItem) {

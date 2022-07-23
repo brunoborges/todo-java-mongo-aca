@@ -9,9 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -23,7 +22,7 @@ import com.example.openapi.model.TodoState;
 @ActiveProfiles("dev")
 public class TestToDoRepository {
 
-    @Resource
+    @Autowired
     private ToDoRepository repository;
 
     @Test
@@ -83,15 +82,14 @@ public class TestToDoRepository {
         // Create Item
         var item = new TodoItem();
         item.setName("Testing");
-        item.setDescription("description");
 
         item = repository.createItem(todoList.getId(), item);
 
-        assertNotNull(todoList);
-        assertNotNull(todoList.getId());
+        assertNotNull(item);
+        assertNotNull(item.getId());
+        assertEquals(todoList.getId(), item.getListId());
         assertEquals(TodoState.TODO, item.getState());
         assertEquals("Testing", item.getName());
-        assertTrue(todoList.getId().length() > 0);
 
         // Retrieve item
         var retrievedItem = repository.getItemById(todoList.getId(), item.getId());
@@ -174,6 +172,10 @@ public class TestToDoRepository {
         // Delete item
         var deleted = repository.deleteItemById(todoList.getId(), item.getId());
         assertTrue(deleted);
+
+        // Delete list
+        var deletedList = repository.deleteListById(todoList.getId());
+        assertTrue(deletedList);
     }
 
 }
