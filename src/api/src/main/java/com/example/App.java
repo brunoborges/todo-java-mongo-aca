@@ -13,6 +13,8 @@ import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.azure.security.keyvault.secrets.SecretClientBuilder;
 import com.microsoft.applicationinsights.attach.ApplicationInsights;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -35,13 +37,20 @@ public class App {
 		};
 	}
 
-	@Value("${spring.data.mongodb.uri:}")
-	private String connectionString;
+	@Value("${azure.keyvault.url:#{null}}")
+	private String keyVaultUrl;
 
 	@Bean
 	@ConditionalOnProperty(name = "todorepository", havingValue = "mongo")
 	ToDoRepository prodMongoRepository() {
-		var connectionStringObj = new ConnectionString(connectionString);
+		var secretClient = new SecretClientBuilder()
+				.vaultUrl(keyVaultUrl)
+				.credential(new DefaultAzureCredentialBuilder().build())
+				.buildClient();
+
+		var mongoUrl = secretClient.getSecret("AZURE-COSMOS-CONNECTION-STRING").getValue();
+
+		var connectionStringObj = new ConnectionString(mongoUrl);
 		var mongoClientSettings = MongoClientSettings.builder()
 				.applyConnectionString(connectionStringObj)
 				.build();
