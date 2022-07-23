@@ -27,10 +27,8 @@ export const getApplicationInsights = (): ApplicationInsights => {
     }
 
     applicationInsights = new ApplicationInsights(ApplicationInsightsConfig);
-
     try {
         applicationInsights.loadAppInsights();
-
         applicationInsights.addTelemetryInitializer((telemetry: ITelemetryItem) => {
             if (!telemetry) {
                 return;
@@ -39,8 +37,9 @@ export const getApplicationInsights = (): ApplicationInsights => {
                 telemetry.tags['ai.cloud.role'] = "webui";
             }
         });
-    } catch (error) {
-        console.log("Error initializing application insights", error);
+    } catch(err) {
+        // TODO - proper logging for web
+        console.error("ApplicationInsights setup failed, ensure environment variable 'REACT_APP_APPLICATIONINSIGHTS_CONNECTION_STRING' has been set.", err);
     }
 
     return applicationInsights;
