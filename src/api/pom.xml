@@ -132,6 +132,30 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.2.2</version>
       </plugin>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>6.0.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>
+                ${project.basedir}/../../openapi.yaml
+              </inputSpec>
+              <generatorName>spring</generatorName>
+              <apiPackage>com.example.openapi.api</apiPackage>
+              <modelPackage>com.example.openapi.model</modelPackage>
+              <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+              <configOptions>
+                <delegatePattern>true</delegatePattern>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -150,41 +174,6 @@
       <properties>
         <spring.profiles.active>prod</spring.profiles.active>
       </properties>
-    </profile>
-    <profile>
-      <id>generateOpenAPI</id>
-      <properties>
-        <spring.profiles.active>dev</spring.profiles.active>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.openapitools</groupId>
-            <artifactId>openapi-generator-maven-plugin</artifactId>
-            <version>6.0.1</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>generate</goal>
-                </goals>
-                <configuration>
-                  <inputSpec>
-                    ${project.basedir}/../../openapi.yaml
-                  </inputSpec>
-                  <output>${project.basedir}</output>
-                  <generatorName>spring</generatorName>
-                  <apiPackage>com.example.openapi.api</apiPackage>
-                  <modelPackage>com.example.openapi.model</modelPackage>
-                  <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-                  <configOptions>
-                    <delegatePattern>true</delegatePattern>
-                  </configOptions>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
 

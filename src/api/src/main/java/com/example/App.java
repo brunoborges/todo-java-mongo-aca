@@ -18,7 +18,7 @@ public class App {
 	@Bean
 	@ConditionalOnProperty(name = "todorepository", havingValue = "mongo", matchIfMissing = false)
 	public ToDoRepository prodMongoRepository() {
-		return new CosmosDBToDoRepository();
+		return new MongoDBToDoRepository();
 	}
 
 	@Bean
