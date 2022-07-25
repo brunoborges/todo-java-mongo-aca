@@ -19,17 +19,21 @@ import com.mongodb.ConnectionString;
 @ConditionalOnProperty(name = "todorepository", havingValue = "mongo", matchIfMissing = false)
 public class MongoDBConfiguration {
 
+    // Obtains programmatically from Key Vault
     @Value("${azure.keyvault.url:#{null}}")
     private String keyVaultUrl;
 
+    // Hardcoded URL in the properties file
     @Value("${spring.data.mongodb.uri:#{null}}")
     private String mongoUri;
 
     private String getMongoURL() {
         if (mongoUri != null) {
+            System.out.println("Using mongo uri: " + mongoUri);
             return mongoUri;
         }
 
+        // Fallback to programmatically getting value from Key Vault
         var secretClient = new SecretClientBuilder()
                 .vaultUrl(keyVaultUrl)
                 .credential(new DefaultAzureCredentialBuilder().build())

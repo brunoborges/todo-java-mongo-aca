@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/openjdk/jdk:17-mariner AS build
 WORKDIR /app
 
 COPY . .
-RUN ./mvnw package
+RUN ./mvnw clean package
 
 FROM mcr.microsoft.com/openjdk/jdk:17-mariner
 
