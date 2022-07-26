@@ -79,8 +79,8 @@ resource api 'Microsoft.App/containerApps@2022-03-01' = {
             }
           ]
           resources: {
-            cpu: 1
-            memory: '2Gi'
+            cpu: 2
+            memory: '4Gi'
           }
         }
       ]
