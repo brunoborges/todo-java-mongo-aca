@@ -1,6 +1,7 @@
 # ToDo Application with a Java API and Azure Cosmos DB API for MongoDB on Azure Container Apps
 
 [![Open in Remote - Containers](https://img.shields.io/static/v1?label=Remote%20-%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/azure-samples/todo-nodejs-mongo-aca)
+[![.github/workflows/azure-dev.yml](https://github.com/brunoborges/todo-java-mongo-aca/actions/workflows/azure-dev.yml/badge.svg)](https://github.com/brunoborges/todo-java-mongo-aca/actions/workflows/azure-dev.yml)
 
 A complete ToDo application that includes everything you need to build, deploy, and monitor an Azure solution using React.js for the Web application, Java for the API, Azure Cosmos DB API for MongoDB for storage, and Azure Monitor for monitoring and logging. It includes application code, tools, and pipelines that serve as a foundation from which you can build upon and customize when creating your own solutions.
 
