@@ -7,20 +7,31 @@
         {
             "name": "Debug Web",
             "request": "launch",
-            "type": "pwa-msedge",
-            "webRoot": "${workspaceFolder}/src/web/src",
-            "url": "http://localhost:3000",
-            "sourceMapPathOverrides": {
-                "webpack:///src/*": "${webRoot}/*"
-            }
+            "runtimeArgs": [
+                "run",
+                "start"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node",
+            "cwd": "${workspaceFolder}/src/web",
+            "envFile": "${input:dotEnvFilePath}",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "outputCapture": "std"
         },
         {
             "name": "Debug API",
             "request": "launch",
             "type": "java",
             "cwd": "${workspaceFolder}/src/api",
+            "console": "internalConsole",
             "mainClass": "com.example.App",
-            "projectName": "todo-azure-api"
+            "projectName": "todo-azure-api",
+            "envFile": "${input:dotEnvFilePath}"
         }
     ],
     "inputs": [

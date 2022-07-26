@@ -37,21 +37,12 @@
             "problemMatcher": []
         },
         {
-            "label": "Start API",
+            "label": "Start API (Azure)",
             "type": "dotenv",
             "targetTasks": [
                 "API java start"
             ],
             "file": "${input:dotEnvFilePath}"
-        },
-        {
-            "label": "Restore API",
-            "type": "shell",
-            "command": "azd restore --service api",
-            "presentation": {
-                "reveal": "silent"
-            },
-            "problemMatcher": []
         },
         {
             "label": "API java start",
@@ -67,7 +58,7 @@
             "problemMatcher": []
         },
         {
-            "label": "Start API and Web",
+            "label": "Start API and Web (Azure)",
             "dependsOn": [
                 "Start API",
                 "Start Web"
@@ -75,16 +66,14 @@
             "problemMatcher": []
         },
         {
-            "label": "Start API and Web WITHOUT AZURE STUFF",
+            "label": "Start API and Web (Local)",
             "dependsOn": [
                 "API java start",
                 "Web npm start"
             ],
             "problemMatcher": []
         }
-
     ],
-
     "inputs": [
         {
             "id": "dotEnvFilePath",
