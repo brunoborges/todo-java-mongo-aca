@@ -39,7 +39,7 @@
       <groupId>com.azure</groupId>
       <artifactId>azure-identity</artifactId>
     </dependency>
-    
+
     <!-- Spring -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -135,23 +135,20 @@
         <version>3.2.2</version>
       </plugin>
       <plugin>
-        <groupId>org.openapitools</groupId>
-        <artifactId>openapi-generator-maven-plugin</artifactId>
-        <version>6.0.1</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.3.0</version>
         <executions>
           <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
             <goals>
-              <goal>generate</goal>
+              <goal>add-source</goal>
             </goals>
             <configuration>
-              <inputSpec>${openapi.specfile}</inputSpec>
-              <generatorName>spring</generatorName>
-              <apiPackage>com.example.openapi.api</apiPackage>
-              <modelPackage>com.example.openapi.model</modelPackage>
-              <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-              <configOptions>
-                <delegatePattern>true</delegatePattern>
-              </configOptions>
+              <sources>
+                <source>src/gen/java</source>
+              </sources>
             </configuration>
           </execution>
         </executions>
@@ -174,6 +171,46 @@
       <properties>
         <spring.profiles.active>prod</spring.profiles.active>
       </properties>
+    </profile>
+    <profile>
+      <id>generateOpenAPI</id>
+      <properties>
+        <spring.profiles.active>dev</spring.profiles.active>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <version>6.0.1</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <configuration>
+                  <inputSpec>${openapi.specfile}</inputSpec>
+                  <generatorName>spring</generatorName>
+                  <output>${project.basedir}</output>
+                  <packageName>com.example.openapi</packageName>
+                  <apiPackage>com.example.openapi.api</apiPackage>
+                  <modelPackage>com.example.openapi.model</modelPackage>
+                  <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+                  <configOptions>
+                    <useSpringBoot3>false</useSpringBoot3>
+                    <useSwaggerUI>false</useSwaggerUI>
+                    <sourceFolder>src/gen/java</sourceFolder>
+                    <basePackage>com.example.openapi</basePackage>
+                    <configPackage>com.example.openapi.config</configPackage>
+                    <delegatePattern>true</delegatePattern>
+                    <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                  </configOptions>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 

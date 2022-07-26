@@ -1,7 +1,7 @@
-src/main/java/com/example/openapi/api/ApiUtil.java
-src/main/java/com/example/openapi/api/ListsApi.java
-src/main/java/com/example/openapi/api/ListsApiController.java
-src/main/java/com/example/openapi/api/ListsApiDelegate.java
-src/main/java/com/example/openapi/model/TodoItem.java
-src/main/java/com/example/openapi/model/TodoList.java
-src/main/java/com/example/openapi/model/TodoState.java
+src/gen/java/com/example/openapi/api/ApiUtil.java
+src/gen/java/com/example/openapi/api/ListsApi.java
+src/gen/java/com/example/openapi/api/ListsApiController.java
+src/gen/java/com/example/openapi/api/ListsApiDelegate.java
+src/gen/java/com/example/openapi/model/TodoItem.java
+src/gen/java/com/example/openapi/model/TodoList.java
+src/gen/java/com/example/openapi/model/TodoState.java
