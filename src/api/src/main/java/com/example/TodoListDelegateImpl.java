@@ -14,10 +14,10 @@ import com.example.openapi.model.TodoList;
 import com.example.openapi.model.TodoState;
 
 @Component
-public class ToDoController implements ListsApiDelegate {
+public class TodoListDelegateImpl implements ListsApiDelegate {
 
     @Autowired
-    private ToDoRepository toDoRepository;
+    private TodoListRepository toDoRepository;
 
     @Override
     public ResponseEntity<List<TodoList>> getLists(BigDecimal top, BigDecimal skip) {

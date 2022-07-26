@@ -15,7 +15,7 @@ import com.example.openapi.model.TodoItem;
 import com.example.openapi.model.TodoList;
 import com.example.openapi.model.TodoState;
 
-public class InMemoryToDoRepository implements ToDoRepository {
+public class InMemoryTodoListRepositoryImpl implements TodoListRepository {
 
     private static final TodoList DUMMY_LIST = new TodoList();
 

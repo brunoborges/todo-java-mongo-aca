@@ -8,7 +8,7 @@ import com.example.openapi.model.TodoItem;
 import com.example.openapi.model.TodoList;
 import com.example.openapi.model.TodoState;
 
-public interface ToDoRepository {
+public interface TodoListRepository {
 
     /**
      * Creates a new Todo item within a list

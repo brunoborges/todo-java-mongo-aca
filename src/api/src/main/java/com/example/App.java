@@ -10,21 +10,24 @@ import com.microsoft.applicationinsights.attach.ApplicationInsights;
 @SpringBootApplication
 public class App {
 
-	public static void main(String[] args) {
+	static {
 		ApplicationInsights.attach();
+	}
+
+	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
 
 	@Bean
 	@ConditionalOnProperty(name = "todorepository", havingValue = "mongo", matchIfMissing = false)
-	public ToDoRepository prodMongoRepository() {
-		return new MongoDBToDoRepository();
+	public TodoListRepository prodMongoRepository() {
+		return new MongoDBTodoListRepositoryImpl();
 	}
 
 	@Bean
 	@ConditionalOnProperty(name = "todorepository", havingValue = "inmemory", matchIfMissing = false)
-	public ToDoRepository devToDoRepository() {
-		return new InMemoryToDoRepository();
+	public TodoListRepository devToDoRepository() {
+		return new InMemoryTodoListRepositoryImpl();
 	}
 
 }

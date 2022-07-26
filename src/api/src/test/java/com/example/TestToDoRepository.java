@@ -23,7 +23,7 @@ import com.example.openapi.model.TodoState;
 public class TestToDoRepository {
 
     @Autowired
-    private ToDoRepository repository;
+    private TodoListRepository repository;
 
     @Test
     public void createRetrieveUpdateDeleteTodoList() {
