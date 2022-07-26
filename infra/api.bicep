@@ -79,13 +79,13 @@ resource api 'Microsoft.App/containerApps@2022-03-01' = {
             }
           ]
           resources: {
-            cpu: 2
-            memory: '4Gi'
+            cpu: 1
+            memory: '2Gi'
           }
         }
       ]
       scale: {
-        minReplicas: 0
+        minReplicas: 1
         maxReplicas: 1
       }
     }
